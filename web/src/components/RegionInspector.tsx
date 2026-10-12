@@ -114,9 +114,9 @@ export function RegionInspector({
 
       {/* Tab 1: Region Inspector with Provinces & Communes */}
       {activeTab === 'inspector' && (
-        <div className="flex-1 flex flex-col justify-between space-y-4">
+        <div className="flex-1 flex flex-col min-h-0 space-y-3">
           {activeRegion ? (
-            <div className="space-y-4 flex-1 flex flex-col">
+            <div className="space-y-3 flex-1 flex flex-col min-h-0">
               {/* Region Banner */}
               <div className="rounded-xl border border-emerald-900/10 dark:border-emerald-800/30 bg-emerald-50/60 dark:bg-emerald-950/20 p-4">
                 <div className="flex items-center justify-between gap-3 mb-2">
@@ -291,20 +291,20 @@ export function RegionInspector({
             </div>
           ) : (
             /* Default State when no region is selected */
-            <div className="space-y-4 flex-1 flex flex-col justify-between">
-              <div className="rounded-xl border border-emerald-900/10 dark:border-emerald-800/30 bg-emerald-50/40 dark:bg-emerald-950/20 p-4">
+            <div className="flex-1 flex flex-col min-h-0 space-y-3">
+              <div className="rounded-xl border border-emerald-900/10 dark:border-emerald-800/30 bg-emerald-50/40 dark:bg-emerald-950/20 p-3.5">
                 <h3 className="font-extrabold text-sm text-emerald-900 dark:text-emerald-200 mb-1">
                   {t.appTitle}
                 </h3>
-                <p className="text-xs text-stone-600 dark:text-stone-400">
-                  {t.interactiveMapHint}. Select any region on the map to explore all its provinces, prefectures, and communes directly here.
+                <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+                  {t.interactiveMapHint}
                 </p>
               </div>
 
               {/* 12 Regions Grid */}
-              <div className="flex-1 overflow-y-auto max-h-[340px] pe-1">
+              <div className="flex-1 min-h-0 overflow-y-auto pe-1">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">
-                  All 12 Administrative Regions
+                  {t.allRegions}
                 </h4>
                 <div className="grid grid-cols-2 gap-2">
                   {allRegions.map((reg) => (
@@ -330,7 +330,7 @@ export function RegionInspector({
           )}
 
           {/* Bottom Statistics Bar */}
-          <div className="pt-3 border-t border-stone-100 dark:border-stone-800 grid grid-cols-4 gap-2 text-center text-xs">
+          <div className="mt-auto pt-3 border-t border-stone-100 dark:border-stone-800 grid grid-cols-4 gap-2 text-center text-xs">
             <div className="rounded-lg bg-stone-50 dark:bg-stone-800 p-2">
               <div className="font-black text-emerald-700 dark:text-emerald-400 text-sm">{stats.regions}</div>
               <div className="text-[10px] text-stone-500">{t.regions}</div>
