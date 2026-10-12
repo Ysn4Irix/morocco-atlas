@@ -20,7 +20,13 @@ export const metadata: Metadata = {
   description: 'Official Morocco Administrative Directory based on HCP RGPH 2024 census. 12 Regions, 75 Provinces & Prefectures, 1,503 Communes.',
   keywords: ['Morocco', 'Regions', 'Provinces', 'Communes', 'HCP', 'RGPH 2024', 'Open Data', 'المغرب', 'الجهات', 'الجماعات'],
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
 };
 
