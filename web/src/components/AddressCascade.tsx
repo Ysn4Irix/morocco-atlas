@@ -5,14 +5,22 @@ import { getAllRegions, getProvincesByRegion, getCommunesByProvince } from '@/li
 import { useI18n } from '@/lib/i18n';
 import { Check, Copy, Layers, Code } from 'lucide-react';
 
-export function AddressCascade() {
+export function AddressCascade({ initialRegionCode = '' }: { initialRegionCode?: string }) {
   const { language, t } = useI18n();
   const regions = useMemo(() => getAllRegions(), []);
 
-  const [selectedRegionCode, setSelectedRegionCode] = useState<string>('');
+  const [selectedRegionCode, setSelectedRegionCode] = useState<string>(initialRegionCode);
   const [selectedProvinceCode, setSelectedProvinceCode] = useState<string>('');
   const [selectedCommuneCode, setSelectedCommuneCode] = useState<string>('');
   const [copiedFormat, setCopiedFormat] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (initialRegionCode) {
+      setSelectedRegionCode(initialRegionCode);
+      setSelectedProvinceCode('');
+      setSelectedCommuneCode('');
+    }
+  }, [initialRegionCode]);
 
   const provinces = useMemo(() => {
     return selectedRegionCode ? getProvincesByRegion(selectedRegionCode) : [];

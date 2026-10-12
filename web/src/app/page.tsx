@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/Header';
 import { MoroccoMap } from '@/components/MoroccoMap';
-import { AddressCascade } from '@/components/AddressCascade';
+import { RegionInspector } from '@/components/RegionInspector';
 import { DirectoryView } from '@/components/DirectoryView';
 import { useI18n } from '@/lib/i18n';
 
 export default function HomePage() {
   const { t } = useI18n();
   const [selectedRegionCode, setSelectedRegionCode] = useState<string | null>(null);
+  const [hoveredRegionCode, setHoveredRegionCode] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen flex flex-col bg-stone-50/50 dark:bg-stone-950">
@@ -30,19 +31,25 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/* Top Grid: Interactive Map + Cascading Address Selector */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Map Column */}
-          <div className="lg:col-span-5 space-y-4">
+        {/* Top Grid: Interactive Map + Companion Region Inspector */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Map Column (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col">
             <MoroccoMap
               selectedRegionCode={selectedRegionCode}
               onSelectRegion={setSelectedRegionCode}
+              hoveredRegionCode={hoveredRegionCode}
+              onHoverRegion={setHoveredRegionCode}
             />
           </div>
 
-          {/* Cascading Address Widget Column */}
-          <div className="lg:col-span-7 space-y-4">
-            <AddressCascade />
+          {/* Companion Region Inspector & Cascade Column (7 cols) */}
+          <div className="lg:col-span-7 flex flex-col">
+            <RegionInspector
+              selectedRegionCode={selectedRegionCode}
+              hoveredRegionCode={hoveredRegionCode}
+              onSelectRegion={setSelectedRegionCode}
+            />
           </div>
         </section>
 
