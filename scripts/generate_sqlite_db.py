@@ -111,11 +111,15 @@ def build_database():
 
     conn.commit()
 
-    # Create search indices
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_provinces_region ON provinces(region_code)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_communes_province ON communes(province_code)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_communes_region ON communes(region_code)")
-    cursor.execute("CREATE INDEX IF NOT EXISTS idx_arrondissements_commune ON arrondissements(commune_code)")
+    # Create search indices (matching Room schema conventions)
+    cursor.execute("CREATE INDEX IF NOT EXISTS index_provinces_region_code ON provinces(region_code)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS index_communes_province_code ON communes(province_code)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS index_communes_region_code ON communes(region_code)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS index_arrondissements_commune_code ON arrondissements(commune_code)")
+
+    # Room master table for Android Room compatibility
+    cursor.execute("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY, identity_hash TEXT)")
+    cursor.execute("INSERT OR REPLACE INTO room_master_table (id, identity_hash) VALUES (42, '23ae683a3cb735e83032f695dc7d01a8')")
 
     conn.commit()
 
@@ -129,6 +133,13 @@ def build_database():
     print(f"Counts: regions={reg_count}, provinces={prov_count}, communes={comm_count}, arrondissements={arr_count}")
 
     conn.close()
+
+    # Also copy to Android assets directory
+    android_assets_db = os.path.join("android", "app", "src", "main", "assets", "moroccodb.db")
+    if os.path.exists(os.path.dirname(android_assets_db)):
+        import shutil
+        shutil.copy2(db_path, android_assets_db)
+        print(f"Synced with Android assets: {android_assets_db}")
 
 if __name__ == "__main__":
     build_database()

@@ -15,7 +15,7 @@ data class RegionEntity(
 
 @Entity(
     tableName = "provinces",
-    indices = [Index(value = ["region_code"])]
+    indices = [Index(value = ["region_code"], name = "index_provinces_region_code")]
 )
 data class ProvinceEntity(
     @PrimaryKey val code: String,
@@ -29,7 +29,10 @@ data class ProvinceEntity(
 
 @Entity(
     tableName = "communes",
-    indices = [Index(value = ["province_code"]), Index(value = ["region_code"])]
+    indices = [
+        Index(value = ["province_code"], name = "index_communes_province_code"),
+        Index(value = ["region_code"], name = "index_communes_region_code")
+    ]
 )
 data class CommuneEntity(
     @PrimaryKey val code: String,
@@ -44,7 +47,7 @@ data class CommuneEntity(
 
 @Entity(
     tableName = "arrondissements",
-    indices = [Index(value = ["commune_code"])]
+    indices = [Index(value = ["commune_code"], name = "index_arrondissements_commune_code")]
 )
 data class ArrondissementEntity(
     @PrimaryKey val code: String,
