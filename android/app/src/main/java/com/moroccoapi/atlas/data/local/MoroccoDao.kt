@@ -15,6 +15,9 @@ interface MoroccoDao {
     @Query("SELECT * FROM regions WHERE code = :code LIMIT 1")
     suspend fun getRegionByCode(code: String): RegionEntity?
 
+    @Query("SELECT * FROM provinces WHERE code = :code LIMIT 1")
+    suspend fun getProvinceByCode(code: String): ProvinceEntity?
+
     @Query("SELECT * FROM provinces WHERE region_code = :regionCode ORDER BY name_fr ASC")
     fun getProvincesByRegion(regionCode: String): Flow<List<ProvinceEntity>>
 
@@ -26,6 +29,28 @@ interface MoroccoDao {
 
     @Query("SELECT * FROM communes WHERE region_code = :regionCode ORDER BY name_fr ASC")
     fun getCommunesByRegion(regionCode: String): Flow<List<CommuneEntity>>
+
+    @Query("""
+        SELECT * FROM regions 
+        WHERE code LIKE '%' || :query || '%'
+           OR hcp_code LIKE '%' || :query || '%'
+           OR name_ar LIKE '%' || :query || '%'
+           OR name_fr LIKE '%' || :query || '%'
+           OR name_en LIKE '%' || :query || '%'
+        LIMIT 10
+    """)
+    fun searchRegions(query: String): Flow<List<RegionEntity>>
+
+    @Query("""
+        SELECT * FROM provinces 
+        WHERE code LIKE '%' || :query || '%'
+           OR hcp_code LIKE '%' || :query || '%'
+           OR name_ar LIKE '%' || :query || '%'
+           OR name_fr LIKE '%' || :query || '%'
+           OR name_en LIKE '%' || :query || '%'
+        LIMIT 20
+    """)
+    fun searchProvinces(query: String): Flow<List<ProvinceEntity>>
 
     @Query("""
         SELECT * FROM communes 

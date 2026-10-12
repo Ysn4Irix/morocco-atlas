@@ -23,8 +23,22 @@ class MoroccoRepository(
     fun getCommunesByProvince(provinceCode: String): Flow<List<CommuneEntity>> =
         dao.getCommunesByProvince(provinceCode)
 
+    fun searchRegions(query: String): Flow<List<RegionEntity>> =
+        dao.searchRegions(query)
+
+    fun searchProvinces(query: String): Flow<List<ProvinceEntity>> =
+        dao.searchProvinces(query)
+
     fun searchCommunes(query: String): Flow<List<CommuneEntity>> =
         dao.searchCommunes(query)
+
+    suspend fun getRegionByCode(code: String): RegionEntity? = withContext(Dispatchers.IO) {
+        dao.getRegionByCode(code)
+    }
+
+    suspend fun getProvinceByCode(code: String): ProvinceEntity? = withContext(Dispatchers.IO) {
+        dao.getProvinceByCode(code)
+    }
 
     suspend fun getLocalCounts(): Triple<Int, Int, Int> = withContext(Dispatchers.IO) {
         val reg = dao.getRegionsCount()
