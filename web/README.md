@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Morocco Administrative Directory - Web Application
+
+A modern, high-performance web application representing the administrative divisions of the Kingdom of Morocco, built with **Next.js 15**, **React 19**, **TypeScript**, and **Tailwind CSS**.
+
+Powered by official census open data from the Haut-Commissariat au Plan (**HCP RGPH 2024**) via [MoroccoAPI](https://moroccodb.ysnirix.xyz).
+
+---
+
+## Features
+
+- **Interactive 12-Region Vector Map**: High-accuracy SVG map with geographic boundaries, hover states, selection synchronization, and keyboard accessibility.
+- **Top Navigation Universal Search**: Real-time autocomplete searching across all 12 regions, 75 provinces/prefectures, and 1,503 communes with instant drilldown navigation.
+- **Companion Region Inspector**:
+  - Detailed administrative statistics (regions, provinces, communes, arrondissements).
+  - Expandable province accordion cards with integrated commune listings.
+  - In-province commune search and filter.
+  - One-click HCP code copying to clipboard with visual confirmation.
+- **Trilingual RTL / LTR Support**:
+  - Arabic (Cairo font, native RTL layout)
+  - French (LTR)
+  - English (LTR)
+- **Production-Ready Containerization**: Standalone Next.js output mode, minimal image footprint, and dedicated `/api/health` probe.
+
+---
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router, Turbopack)
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS v4
+- **Icons**: Lucide React
+- **Language**: TypeScript 5
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+ (recommended: Node.js 22 LTS)
+- npm 10+
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Build standalone production bundle
+npm run build
 
-## Learn More
+# Start production server
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Health Check
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application includes a production liveness/readiness probe:
+```bash
+curl http://localhost:3000/api/health
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open-source software licensed under the [MIT License](../LICENSE).
