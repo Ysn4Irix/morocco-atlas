@@ -22,8 +22,6 @@ export interface Translations {
   selectRegion: string;
   selectProvince: string;
   selectCommune: string;
-  addressCascadeTitle: string;
-  addressCascadeDesc: string;
   interactiveMap: string;
   interactiveMapHint: string;
   searchResults: string;
@@ -59,8 +57,6 @@ const translations: Record<Language, Translations> = {
     selectRegion: 'اختر الجهة أولاً',
     selectProvince: 'اختر الإقليم أو العمالة',
     selectCommune: 'اختر الجماعة',
-    addressCascadeTitle: 'مُوَلِّد حقول العناوين المتتالية',
-    addressCascadeDesc: 'أداة تفاعلية لاختبار تدفق ملء العناوين (جهة -> إقليم -> جماعة) لمتاجر التجارة الإلكترونية والاستمارات',
     interactiveMap: 'الخريطة الإدارية التفاعلية',
     interactiveMapHint: 'انقر على أي جهة في الخريطة لتصفية أقاليمها وجماعاتها تلقائياً',
     searchResults: 'نتائج البحث',
@@ -94,8 +90,6 @@ const translations: Record<Language, Translations> = {
     selectRegion: 'Sélectionner une région',
     selectProvince: 'Sélectionner une province',
     selectCommune: 'Sélectionner une commune',
-    addressCascadeTitle: 'Générateur de Sélecteur d\'Adresses en Cascade',
-    addressCascadeDesc: 'Composant interactif pour checkouts e-commerce et formulaires KYC (Région -> Province -> Commune)',
     interactiveMap: 'Carte Administrative Interactive',
     interactiveMapHint: 'Cliquez sur une région pour filtrer automatiquement ses subdivisions',
     searchResults: 'Résultats de recherche',
@@ -129,8 +123,6 @@ const translations: Record<Language, Translations> = {
     selectRegion: 'Select a region',
     selectProvince: 'Select a province',
     selectCommune: 'Select a commune',
-    addressCascadeTitle: 'Cascading Address Selector Generator',
-    addressCascadeDesc: 'Interactive cascading address dropdowns (Region -> Province -> Commune) for e-commerce checkouts',
     interactiveMap: 'Interactive Regional Map',
     interactiveMapHint: 'Click any region on the map to automatically filter subdivisions',
     searchResults: 'Search Results',
