@@ -101,29 +101,44 @@ npm start
 
 ---
 
-### 2. Production Docker Compose Deployment
+### 2. Dokploy Production Deployment
 
-Run the web application behind an Nginx reverse proxy with a single command:
+This project is configured out-of-the-box for [Dokploy](https://dokploy.com) using `docker-compose.yml`:
+
+1. In your Dokploy dashboard, create a new service and select **Compose** -> **Docker Compose**.
+2. Connect your Git repository (`https://github.com/Ysn4Irix/morocco-atlas`), set branch to `main`, and compose path to `./docker-compose.yml`.
+3. In the **Domains** tab, click **Add Domain**:
+   - **Service**: Select `web`
+   - **Container Port**: `3000`
+   - **Host**: Enter your domain (e.g., `moroccodb.ysnirix.xyz`)
+   - **Certificate**: Enable Let's Encrypt for automatic HTTPS
+4. Click **Deploy**. Dokploy automatically manages Traefik routing, TLS termination, and health monitoring.
+
+---
+
+### 3. Standalone Docker Compose Deployment (Nginx Reverse Proxy)
+
+For deployment on a standalone VPS or local Docker without Dokploy:
 
 ```bash
 # 1. Copy environment configuration
 cp .env.example .env
 
 # 2. Build and launch services in detached mode
-docker compose up -d --build
+docker compose -f docker-compose.standalone.yml up -d --build
 
 # 3. Verify container health status
-docker compose ps
+docker compose -f docker-compose.standalone.yml ps
 
 # 4. View application logs
-docker compose logs -f
+docker compose -f docker-compose.standalone.yml logs -f
 ```
 
 The application is accessible on port `80` (or the configured `PORT` in `.env`).
 
 ---
 
-### 3. Native Android Application
+### 4. Native Android Application
 
 Build the debug APK with Gradle:
 
@@ -147,7 +162,8 @@ Or open the `android/` directory in **Android Studio** and run on any emulator o
 morocco-db/
 ├── LICENSE                         # MIT Open Source License
 ├── README.md                       # Master documentation
-├── docker-compose.yml              # Production Docker Compose configuration
+├── docker-compose.yml              # Dokploy-compatible production Compose configuration
+├── docker-compose.standalone.yml   # Standalone Compose setup with Nginx reverse proxy
 ├── .env.example                    # Environment variable template
 ├── nginx/
 │   ├── Dockerfile                  # Production Nginx 1.27 Alpine image
