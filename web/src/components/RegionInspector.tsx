@@ -80,18 +80,6 @@ export function RegionInspector({
             {t.details}
           </h3>
         </div>
-
-        {selectedRegionCode && (
-          <button
-            onClick={() => {
-              onSelectRegion(null);
-              setExpandedProvince(null);
-            }}
-            className="rounded-lg border border-emerald-600/30 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 text-xs font-semibold text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
-          >
-            {t.clearFilter}
-          </button>
-        )}
       </div>
 
       {/* Region Inspector with Provinces & Communes */}
